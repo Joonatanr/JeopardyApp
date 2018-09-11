@@ -29,8 +29,11 @@ namespace Jeopardy
 
         private Excel.Application   xlApp;
         private Excel.Workbook      xlWorkbook;
-
         private ConvertedDatatable mainTable;
+
+        private int FieldColumn = 0;
+        private int QuestionColumn = 0;
+        private int AnswerColumn = 0;
 
         public Parser()
         {
@@ -45,6 +48,41 @@ namespace Jeopardy
                 Excel.Range rng = workSheet.UsedRange;
                 mainTable = GetTableFromRange(rng);
 
+                for (int x = 1; x <= mainTable.LastRow; x++)
+                {
+                    for (int y = 1; y <= mainTable.LastColumn; y++)
+                    {
+                        if (mainTable.Cells[x, y] == null)
+                        {
+                            continue;
+                        }
+
+                        if (mainTable.Cells[x, y].ToString() == "Valdkond->")
+                        {
+                            FieldColumn = y;
+                        }
+
+                        if (mainTable.Cells[x, y].ToString() == "Küsimus")
+                        {
+                            QuestionColumn = y;
+                        }
+
+                        if (mainTable.Cells[x, y].ToString() == "Vastus")
+                        {
+                            AnswerColumn = y;
+                        }
+                    }
+
+                    // We have found them all... 
+                    if (FieldColumn > 0 && AnswerColumn > 0 && QuestionColumn > 0)
+                    {
+                        Console.WriteLine("FieldColumn : " + FieldColumn + " AnswerColumn : " + AnswerColumn + "QuestionColumn : " + QuestionColumn);
+
+                        break;
+                    }
+                }
+
+
                 return true;
                
             }
@@ -52,6 +90,12 @@ namespace Jeopardy
             {
                 return false;
             }
+        }
+
+
+        private void parseQuestionField(int x , int y)
+        {
+
         }
 
 
