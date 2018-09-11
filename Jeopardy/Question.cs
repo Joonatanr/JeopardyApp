@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Jeopardy
 {
-    class QuestionField
+    public class QuestionField
     {
         public String Name { get; set; }
 
@@ -23,7 +23,7 @@ namespace Jeopardy
         }
     }
 
-    class Question
+    public class Question
     {
         public String QuestionString    { get; set; }
         public String AnswerString      { get; set; }
