@@ -32,6 +32,7 @@ namespace Jeopardy
         private ConvertedDatatable mainTable;
 
         private int FieldColumn = 0;
+        private int FieldFirstRow = 0;
         private int QuestionColumn = 0;
         private int AnswerColumn = 0;
 
@@ -40,7 +41,7 @@ namespace Jeopardy
             xlApp = new Excel.Application();
         }
 
-        public bool LoadQuestionsFromFile(string filePath)
+        public bool LoadQuestionsFromFile(string filePath, out List<QuestionField> res)
         {
             if (OpenFile(filePath))
             {
@@ -60,6 +61,7 @@ namespace Jeopardy
                         if (mainTable.Cells[x, y].ToString() == "Valdkond->")
                         {
                             FieldColumn = y;
+                            FieldFirstRow = x + 1;
                         }
 
                         if (mainTable.Cells[x, y].ToString() == "Küsimus")
@@ -77,25 +79,66 @@ namespace Jeopardy
                     if (FieldColumn > 0 && AnswerColumn > 0 && QuestionColumn > 0)
                     {
                         Console.WriteLine("FieldColumn : " + FieldColumn + " AnswerColumn : " + AnswerColumn + "QuestionColumn : " + QuestionColumn);
-
                         break;
                     }
                 }
 
+                //Lets move forward in the file.
+                int currentRow = FieldFirstRow;
 
+                List<QuestionField> parsedList = new List<QuestionField>();
+
+                while (currentRow < mainTable.LastRow)
+                {
+                    if (mainTable.Cells[currentRow, FieldColumn] != null)
+                    {
+                        //Lets do this in a simple way, we just assume we found a field.
+                        QuestionField field = parseQuestionField(currentRow, FieldColumn);
+                        parsedList.Add(field);
+                        currentRow += 6;
+                    }
+                    else
+                    {
+                        currentRow++;
+                    }
+                }
+
+
+                Console.WriteLine("Parsed {0} fields from excel file", parsedList.Count);
+                res = parsedList;
                 return true;
                
             }
             else
             {
+                res = null;
                 return false;
             }
         }
 
 
-        private void parseQuestionField(int x , int y)
+        private QuestionField parseQuestionField(int x , int y)
         {
+            QuestionField res;
+            string name = mainTable.Cells[x, y].ToString();
+            res = new QuestionField(name);
 
+            for (int ix = 0; ix < 5; ix++)
+            {
+                object QuestionCell = mainTable.Cells[ix + x + 1, QuestionColumn];
+                object AnswerCell = mainTable.Cells[ix + x + 1, AnswerColumn];
+
+                if (QuestionCell != null && AnswerCell != null)
+                {
+                    string qString = QuestionCell.ToString();
+                    string aString = AnswerCell.ToString();
+
+                    res.questionArray[ix].QuestionString = qString;
+                    res.questionArray[ix].AnswerString = aString;
+                }
+            }
+
+            return res;
         }
 
 

@@ -10,7 +10,7 @@ namespace Jeopardy
     {
         public String Name { get; set; }
 
-        private Question[] questionArray = new Question[5];
+        public Question[] questionArray = new Question[5];
 
         public QuestionField(String name)
         {
@@ -25,14 +25,15 @@ namespace Jeopardy
 
     class Question
     {
-        public String QuestionString { get; set; }
-        public String AnswerString { get; set; }
+        public String QuestionString    { get; set; }
+        public String AnswerString      { get; set; }
 
         public Boolean isAnswered { get; set; } = false; 
 
         public Question()
         {
-
+            QuestionString = null;
+            AnswerString = null;
         }
 
         public Question(string q, string a)

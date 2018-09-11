@@ -29,7 +29,15 @@ namespace Jeopardy
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Parser myParser = new Parser();
-                bool res = myParser.LoadQuestionsFromFile(openFileDialog1.FileName);
+                List<QuestionField> parsedQuestions;
+
+                bool res = myParser.LoadQuestionsFromFile(openFileDialog1.FileName, out parsedQuestions);
+                
+                foreach(QuestionField q in parsedQuestions)
+                {
+                    Console.WriteLine("Field : " + q.Name);
+                }
+
 
                 if (!res)
                 {
