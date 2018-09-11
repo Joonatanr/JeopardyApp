@@ -15,6 +15,8 @@ namespace Jeopardy
         public Form1()
         {
             InitializeComponent();
+
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -24,7 +26,16 @@ namespace Jeopardy
 
         private void button2_Click(object sender, EventArgs e)
         {
-            displayWindow1.setActive(false);
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Parser myParser = new Parser();
+                bool res = myParser.LoadQuestionsFromFile(openFileDialog1.FileName);
+
+                if (!res)
+                {
+                    MessageBox.Show("Failed to open file");
+                }
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
