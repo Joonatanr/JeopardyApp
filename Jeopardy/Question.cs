@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,21 @@ namespace Jeopardy
         {
             this.QuestionString = q;
             this.AnswerString = a;
+        }
+    }
+
+    class QuestionPicture : Question
+    {
+        private Image img;
+
+        public QuestionPicture(string q, string a, Image img) : base(q, a)
+        {
+            this.img = img;
+        }
+
+        public Image getImage()
+        {
+            return img;
         }
     }
 }

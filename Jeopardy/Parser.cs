@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,7 @@ namespace Jeopardy
         private int FieldFirstRow = 0;
         private int QuestionColumn = 0;
         private int AnswerColumn = 0;
+        private int PictureColumn = 0;
 
         public Parser()
         {
@@ -73,10 +75,15 @@ namespace Jeopardy
                         {
                             AnswerColumn = y;
                         }
+
+                        if (mainTable.Cells[x, y].ToString() == "Pilt")
+                        {
+                            PictureColumn = y;
+                        }
                     }
 
                     // We have found them all... 
-                    if (FieldColumn > 0 && AnswerColumn > 0 && QuestionColumn > 0)
+                    if (FieldColumn > 0 && AnswerColumn > 0 && QuestionColumn > 0 && PictureColumn > 0)
                     {
                         Console.WriteLine("FieldColumn : " + FieldColumn + " AnswerColumn : " + AnswerColumn + "QuestionColumn : " + QuestionColumn);
                         break;
@@ -127,12 +134,33 @@ namespace Jeopardy
             {
                 object QuestionCell = mainTable.Cells[ix + x + 1, QuestionColumn];
                 object AnswerCell = mainTable.Cells[ix + x + 1, AnswerColumn];
+                object PictureCell = mainTable.Cells[ix + x + 1, PictureColumn];
+
+                string qString = "blank";
+                string aString = "blank";
 
                 if (QuestionCell != null && AnswerCell != null)
                 {
-                    string qString = QuestionCell.ToString();
-                    string aString = AnswerCell.ToString();
+                    qString = QuestionCell.ToString();
+                    aString = AnswerCell.ToString();
+                }
 
+                if (PictureCell != null)
+                {
+                    string picturePath = PictureCell.ToString();
+                    Image img;
+                    try
+                    {
+                        img = Bitmap.FromFile(picturePath);
+                        res.questionArray[ix] = new QuestionPicture(qString, aString, img);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Failed to load image : " + picturePath);
+                    }
+                }
+                else
+                {
                     res.questionArray[ix].QuestionString = qString;
                     res.questionArray[ix].AnswerString = aString;
                 }
