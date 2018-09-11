@@ -16,5 +16,22 @@ namespace Jeopardy
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {   
+            displayWindow1.setActive(true);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            displayWindow1.setActive(false);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
