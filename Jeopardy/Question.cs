@@ -32,8 +32,8 @@ namespace Jeopardy
 
         public Question()
         {
-            QuestionString = null;
-            AnswerString = null;
+            QuestionString = "blank";
+            AnswerString = "blank";
         }
 
         public Question(string q, string a)

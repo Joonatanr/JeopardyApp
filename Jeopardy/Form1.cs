@@ -31,6 +31,13 @@ namespace Jeopardy
 
         }
 
+        private void ShowQuestion(Question q)
+        {
+            displayWindow1.Location = new Point(0, 0);
+            displayWindow1.Size = this.Size;
+            displayWindow1.setActive(q);
+        }
+
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -62,9 +69,11 @@ namespace Jeopardy
                     UserControlQuestionField item = new UserControlQuestionField(field);
                     Point location = new Point(offset, yPos);
                     item.Location = location;
+                    item.QuestionHandler = new UserControlQuestionField.QuestionPressedHandler(ShowQuestion);
                     groupBox1.Controls.Add(item);
 
                     offset += item.Size.Width + 1;
+
                 }
 
                 //This needs to be done at the end...

@@ -20,6 +20,7 @@ namespace Jeopardy
         } ;
 
         private WindowState state = WindowState.STATE_CLOSED;
+        private Question question;
 
         public DisplayWindow()
         {
@@ -27,56 +28,36 @@ namespace Jeopardy
             this.BackColor = Color.Transparent;
         }
 
-        public void setActive(bool mode)
+        public void setActive(Question q)
         {
-            if (mode)
-            {
-                state = WindowState.STATE_QUESTION;
-            }
+            this.question = q;
+            state = WindowState.STATE_QUESTION;
             this.BringToFront();
+            this.BackColor = Color.Blue;
+            MessageLabel.ForeColor = Color.White;
+
+            MessageLabel.Text = q.QuestionString;
+
+            MessageLabel.Left = (this.ClientSize.Width - MessageLabel.Width) / 2;
+            MessageLabel.Top = (this.ClientSize.Height - MessageLabel.Height) / 2;
+
             panel1.Invalidate();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            string msg = null;
-
-            if(state == WindowState.STATE_CLOSED)
-            {
-                return;
-            }
-
-            Graphics gfx = panel1.CreateGraphics();
-            gfx.FillRectangle(new SolidBrush(Color.Blue), new Rectangle(new Point(0, 0), this.Size));
-
-            if (state == WindowState.STATE_QUESTION)
-            {
-                msg = "Question";
-            }
-            else if(state == WindowState.STATE_ANSWER)
-            {
-                msg = "Answer";
-            }
-
-            if (msg != null)
-            {
-                Font font = new Font("Tahoma", 14);
-
-                Size textSize = TextRenderer.MeasureText(msg, font);
-                gfx.DrawString(msg, font, Brushes.White, new Rectangle(new Point(0, 0), textSize));
-            }
-        }
 
         private void panel1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if(state == WindowState.STATE_QUESTION)
             {
                 state = WindowState.STATE_ANSWER;
+                MessageLabel.Text = question.AnswerString;
                 panel1.Invalidate();
             }
             else if(state == WindowState.STATE_ANSWER)
             {
                 state = WindowState.STATE_CLOSED;
+                this.BackColor = Color.Transparent;
+                MessageLabel.Text = "";
                 SendToBack();
                 panel1.Invalidate();
             }
