@@ -33,6 +33,7 @@ namespace Jeopardy
             {
                 state = WindowState.STATE_QUESTION;
             }
+            this.BringToFront();
             panel1.Invalidate();
         }
 
@@ -76,6 +77,7 @@ namespace Jeopardy
             else if(state == WindowState.STATE_ANSWER)
             {
                 state = WindowState.STATE_CLOSED;
+                SendToBack();
                 panel1.Invalidate();
             }
         }

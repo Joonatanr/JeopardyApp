@@ -56,7 +56,7 @@
             // displayWindow1
             // 
             this.displayWindow1.BackColor = System.Drawing.Color.Transparent;
-            this.displayWindow1.Location = new System.Drawing.Point(141, 89);
+            this.displayWindow1.Location = new System.Drawing.Point(12, 12);
             this.displayWindow1.Name = "displayWindow1";
             this.displayWindow1.Size = new System.Drawing.Size(647, 349);
             this.displayWindow1.TabIndex = 1;
