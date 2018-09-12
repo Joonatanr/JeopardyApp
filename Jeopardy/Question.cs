@@ -29,7 +29,9 @@ namespace Jeopardy
         public String QuestionString    { get; set; }
         public String AnswerString      { get; set; }
 
-        public Boolean isAnswered { get; set; } = false; 
+        public Boolean isAnswered { get; set; } = false;
+
+        public int Score { get; set; } = 0;
 
         public Question()
         {

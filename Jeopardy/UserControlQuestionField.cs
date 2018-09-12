@@ -17,6 +17,7 @@ namespace Jeopardy
         public QuestionPressedHandler QuestionHandler;
 
         private QuestionField myField = null;
+        private bool isBlocked = false;
 
         public UserControlQuestionField()
         {
@@ -29,36 +30,79 @@ namespace Jeopardy
             labelCategory.Text = myField.Name;
         }
 
+        public void setBlock(bool mode)
+        {
+            isBlocked = mode;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            QuestionHandler?.Invoke(myField.questionArray[0]);
-
-            //Wonder how this will work???
-            this.groupBox1.Controls.Remove(button1);
+            if (isBlocked)
+            {
+                MessageBox.Show("Allocate points first.");
+            }
+            else
+            {
+                myField.questionArray[0].Score = 100;
+                QuestionHandler?.Invoke(myField.questionArray[0]);
+                this.groupBox1.Controls.Remove(button1);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            QuestionHandler?.Invoke(myField.questionArray[1]);
-            this.groupBox1.Controls.Remove(button2);
+            if (isBlocked)
+            {
+                MessageBox.Show("Allocate points first.");
+            }
+            else
+            {
+                myField.questionArray[1].Score = 200;
+                QuestionHandler?.Invoke(myField.questionArray[1]);
+                this.groupBox1.Controls.Remove(button2);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            QuestionHandler?.Invoke(myField.questionArray[2]);
-            this.groupBox1.Controls.Remove(button3);
+            if (isBlocked)
+            {
+                MessageBox.Show("Allocate points first.");
+            }
+            else
+            {
+                myField.questionArray[2].Score = 300;
+                QuestionHandler?.Invoke(myField.questionArray[2]);
+                this.groupBox1.Controls.Remove(button3);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            QuestionHandler?.Invoke(myField.questionArray[3]);
-            this.groupBox1.Controls.Remove(button4);
+            if (isBlocked)
+            {
+                MessageBox.Show("Allocate points first.");
+            }
+            else
+            {
+                myField.questionArray[3].Score = 400;
+                QuestionHandler?.Invoke(myField.questionArray[3]);
+                this.groupBox1.Controls.Remove(button4);
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            QuestionHandler?.Invoke(myField.questionArray[4]);
-            this.groupBox1.Controls.Remove(button5);
+            if (isBlocked)
+            {
+                MessageBox.Show("Allocate points first.");
+            }
+            else
+            {
+                myField.questionArray[4].Score = 500;
+                QuestionHandler?.Invoke(myField.questionArray[4]);
+                this.groupBox1.Controls.Remove(button5);
+            }
         }
     }
 }
