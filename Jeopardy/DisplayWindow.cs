@@ -26,6 +26,8 @@ namespace Jeopardy
         {
             InitializeComponent();
             this.BackColor = Color.Transparent;
+
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         public void setActive(Question q)
@@ -40,6 +42,8 @@ namespace Jeopardy
             if (q is QuestionPicture)
             {
                 QuestionPicture qp = q as QuestionPicture;
+
+                pictureBox1.Left = (this.ClientSize.Width - pictureBox1.Width) / 2;
                 pictureBox1.Image = qp.getImage();
                 pictureBox1.Show();
             }
@@ -68,6 +72,7 @@ namespace Jeopardy
                 state = WindowState.STATE_CLOSED;
                 this.BackColor = Color.Transparent;
                 MessageLabel.Text = "";
+                pictureBox1.Hide();
                 SendToBack();
                 panel1.Invalidate();
             }
