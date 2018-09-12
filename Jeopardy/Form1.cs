@@ -14,6 +14,11 @@ namespace Jeopardy
     {
         private DisplayWindow displayWindow1;
 
+        //Lets keep track of all the usercontrols that we have in here.
+        private List<UserControlQuestionField> myQuestionCategories = new List<UserControlQuestionField>();
+        private List<TeamControl> myTeams = new List<TeamControl>();
+
+
         public Form1()
         {
             InitializeComponent();
@@ -38,14 +43,9 @@ namespace Jeopardy
             textBoxCurrentScore.Text = q.Score.ToString();
             displayWindow1.setActive(q);
 
-            //TODO : Should block answering until points have been given to a team.
-            foreach(UserControl field in groupBox1.Controls)
+            foreach (UserControlQuestionField qField in myQuestionCategories)
             {
-                if (field is UserControlQuestionField)
-                {
-                    UserControlQuestionField qField = field as UserControlQuestionField;
-                    qField.setBlock(true);
-                }
+                qField.setBlock(true);
             }
         }
 
@@ -64,13 +64,9 @@ namespace Jeopardy
             textBoxCurrentScore.Text = "0";
 
             /* Unblock the question buttons... */
-            foreach (UserControl field in groupBox1.Controls)
+            foreach (UserControlQuestionField qField in myQuestionCategories)
             {
-                if (field is UserControlQuestionField)
-                {
-                    UserControlQuestionField qField = field as UserControlQuestionField;
-                    qField.setBlock(false);
-                }
+                qField.setBlock(false);
             }
 
             return res;
@@ -110,7 +106,7 @@ namespace Jeopardy
                     item.Location = location;
                     item.QuestionHandler = new UserControlQuestionField.QuestionPressedHandler(ShowQuestion);
                     groupBox1.Controls.Add(item);
-
+                    myQuestionCategories.Add(item);
                     offset += item.Size.Width + 1;
 
                 }
