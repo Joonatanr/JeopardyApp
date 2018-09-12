@@ -80,7 +80,7 @@
             this.groupBox2.Controls.Add(this.textBoxCurrentScore);
             this.groupBox2.Location = new System.Drawing.Point(3, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1012, 146);
+            this.groupBox2.Size = new System.Drawing.Size(1008, 142);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Teams";
@@ -106,7 +106,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(862, 22);
+            this.label1.Location = new System.Drawing.Point(858, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 13);
             this.label1.TabIndex = 1;
@@ -115,7 +115,7 @@
             // textBoxCurrentScore
             // 
             this.textBoxCurrentScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCurrentScore.Location = new System.Drawing.Point(904, 19);
+            this.textBoxCurrentScore.Location = new System.Drawing.Point(900, 19);
             this.textBoxCurrentScore.Name = "textBoxCurrentScore";
             this.textBoxCurrentScore.Size = new System.Drawing.Size(100, 20);
             this.textBoxCurrentScore.TabIndex = 0;
@@ -125,6 +125,7 @@
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Location = new System.Drawing.Point(12, 28);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
