@@ -31,9 +31,7 @@ namespace Jeopardy
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            teamControl1.ScoreHandler = new TeamControl.ScoreIncreaseHandler(scoreHandler);
-            teamControl2.ScoreHandler = new TeamControl.ScoreIncreaseHandler(scoreHandler);
-            teamControl3.ScoreHandler = new TeamControl.ScoreIncreaseHandler(scoreHandler);
+            
         }
 
         private void ShowQuestion(Question q)
@@ -94,7 +92,8 @@ namespace Jeopardy
                 }
 
                 /* Lets populate the game area... */
-                groupBox1.Controls.Clear();
+                //groupBox1.Controls.Clear();
+                splitContainer1.Panel1.Controls.Clear();
 
                 int offset = 0;
                 int yPos = 40;
@@ -105,15 +104,15 @@ namespace Jeopardy
                     Point location = new Point(offset, yPos);
                     item.Location = location;
                     item.QuestionHandler = new UserControlQuestionField.QuestionPressedHandler(ShowQuestion);
-                    groupBox1.Controls.Add(item);
+                    splitContainer1.Panel1.Controls.Add(item);
                     myQuestionCategories.Add(item);
                     offset += item.Size.Width + 1;
 
                 }
 
                 //This needs to be done at the end...
-                groupBox1.Controls.Add(displayWindow1);
-                groupBox1.Invalidate();
+                splitContainer1.Panel1.Controls.Add(displayWindow1);
+                splitContainer1.Panel1.Invalidate();
             }
         }
 
@@ -131,15 +130,13 @@ namespace Jeopardy
             TeamControl myControl = new TeamControl();
             myControl.TeamName = textBoxNewTeamName.Text;
             myControl.Location = new Point(xOffset, yOffset);
+            myControl.ScoreHandler = new TeamControl.ScoreIncreaseHandler(scoreHandler);
 
-            yOffset += myControl.Size.Height + 5;
+            yOffset += myControl.Size.Height + 1;
 
             myTeams.Add(myControl);
             groupBox2.Controls.Add(myControl);
-            //myControl.Invalidate();
 
-
-            //We still have to increase the groupbox....
         }
     }
 }
