@@ -116,5 +116,30 @@ namespace Jeopardy
                 groupBox1.Invalidate();
             }
         }
+
+        private int yOffset = 50;
+        private int xOffset = 10;
+
+        private void buttonAddTeam_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(textBoxNewTeamName.Text))
+            {
+                MessageBox.Show("Empty team name");
+                return;
+            }           
+
+            TeamControl myControl = new TeamControl();
+            myControl.TeamName = textBoxNewTeamName.Text;
+            myControl.Location = new Point(xOffset, yOffset);
+
+            yOffset += myControl.Size.Height + 5;
+
+            myTeams.Add(myControl);
+            groupBox2.Controls.Add(myControl);
+            //myControl.Invalidate();
+
+
+            //We still have to increase the groupbox....
+        }
     }
 }
