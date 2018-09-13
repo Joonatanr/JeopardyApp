@@ -18,6 +18,7 @@ namespace Jeopardy
         private List<UserControlQuestionField> myQuestionCategories = new List<UserControlQuestionField>();
         private List<TeamControl> myTeams = new List<TeamControl>();
 
+        private const int questionYOffset = 5;
 
         public Form1()
         {
@@ -96,14 +97,21 @@ namespace Jeopardy
                 splitContainer1.Panel1.Controls.Clear();
 
                 int offset = 0;
-                int yPos = 40;
+                
+
+                int width = splitContainer1.Panel1.Width / parsedQuestions.Count;
 
                 foreach (QuestionField field in parsedQuestions)
                 {
                     UserControlQuestionField item = new UserControlQuestionField(field);
-                    Point location = new Point(offset, yPos);
+                    Point location = new Point(offset, questionYOffset);
                     item.Location = location;
                     item.QuestionHandler = new UserControlQuestionField.QuestionPressedHandler(ShowQuestion);
+                    item.Size = new Size(width, item.Size.Height);
+                    
+                    item.Anchor = (AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left);
+
+
                     splitContainer1.Panel1.Controls.Add(item);
                     myQuestionCategories.Add(item);
                     offset += item.Size.Width + 1;
@@ -137,6 +145,24 @@ namespace Jeopardy
             myTeams.Add(myControl);
             groupBox2.Controls.Add(myControl);
 
+        }
+
+        private void splitContainer1_Panel1_SizeChanged(object sender, EventArgs e)
+        {
+            if (myQuestionCategories.Count > 0)
+            {
+                int offset = 0;
+
+                int width = splitContainer1.Panel1.Width / myQuestionCategories.Count;
+
+                foreach (UserControlQuestionField item in myQuestionCategories)
+                {
+                    Point location = new Point(offset, questionYOffset);
+                    item.Location = location;
+                    item.Size = new Size(width, item.Size.Height);
+                    offset += item.Size.Width + 1;
+                }
+            }
         }
     }
 }

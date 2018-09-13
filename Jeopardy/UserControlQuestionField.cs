@@ -19,9 +19,12 @@ namespace Jeopardy
         private QuestionField myField = null;
         private bool isBlocked = false;
 
+        private Font usedFont;
+
         public UserControlQuestionField()
         {
             InitializeComponent();
+            usedFont = labelCategory.Font;
         }
 
         public UserControlQuestionField(QuestionField field) : this () 
@@ -104,5 +107,36 @@ namespace Jeopardy
                 this.groupBox1.Controls.Remove(button5);
             }
         }
+
+        private void labelCategory_TextChanged(object sender, EventArgs e)
+        {
+            RecalculateTextFont();
+        }
+
+        private void groupBox1_SizeChanged(object sender, EventArgs e)
+        {
+            RecalculateTextFont();
+        }
+
+        private void RecalculateTextFont()
+        {
+            String currentStr = labelCategory.Text;
+            Size strSize = TextRenderer.MeasureText(currentStr, usedFont);
+            float currentFontSize = usedFont.SizeInPoints;
+            Font recalculatedFont = usedFont;
+            
+
+            while (strSize.Width >= labelCategory.Width)
+            {
+                currentFontSize -= 0.25f;
+                recalculatedFont = new Font(usedFont.FontFamily, currentFontSize);
+                strSize = TextRenderer.MeasureText(currentStr, recalculatedFont);
+            }
+
+            labelCategory.Font = recalculatedFont;
+
+        }
+
+
     }
 }
