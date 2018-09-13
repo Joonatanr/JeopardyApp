@@ -77,5 +77,12 @@ namespace Jeopardy
                 panel1.Invalidate();
             }
         }
+
+        private void MessageLabel_TextChanged(object sender, EventArgs e)
+        {
+            int textWidth = TextRenderer.MeasureText(MessageLabel.Text, MessageLabel.Font).Width;
+            /* Recenter the control */
+            MessageLabel.Left = (this.Width / 2) - (textWidth / 2);
+        }
     }
 }

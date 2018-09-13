@@ -163,6 +163,11 @@ namespace Jeopardy
                     offset += item.Size.Width + 1;
                 }
             }
+
+            if (displayWindow1 != null)
+            {
+                displayWindow1.Size = splitContainer1.Panel1.Size;
+            }
         }
     }
 }

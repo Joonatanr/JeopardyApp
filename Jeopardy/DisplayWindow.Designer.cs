@@ -42,13 +42,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(762, 546);
+            this.panel1.Size = new System.Drawing.Size(927, 583);
             this.panel1.TabIndex = 0;
             this.panel1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDoubleClick);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(158, 248);
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox1.Location = new System.Drawing.Point(244, 40);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(402, 240);
             this.pictureBox1.TabIndex = 1;
@@ -56,18 +57,17 @@
             // 
             // MessageLabel
             // 
-            this.MessageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MessageLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.MessageLabel.AutoSize = true;
-            this.MessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.MessageLabel.ForeColor = System.Drawing.Color.White;
-            this.MessageLabel.Location = new System.Drawing.Point(153, 157);
+            this.MessageLabel.Location = new System.Drawing.Point(399, 314);
             this.MessageLabel.Name = "MessageLabel";
-            this.MessageLabel.Size = new System.Drawing.Size(79, 29);
+            this.MessageLabel.Size = new System.Drawing.Size(100, 37);
             this.MessageLabel.TabIndex = 0;
             this.MessageLabel.Text = "label1";
             this.MessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.MessageLabel.TextChanged += new System.EventHandler(this.MessageLabel_TextChanged);
             // 
             // DisplayWindow
             // 
@@ -75,7 +75,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
             this.Name = "DisplayWindow";
-            this.Size = new System.Drawing.Size(762, 546);
+            this.Size = new System.Drawing.Size(927, 583);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
